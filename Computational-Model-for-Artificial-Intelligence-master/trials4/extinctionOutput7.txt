@@ -1,0 +1,48 @@
+
+
+------------------------- Trial #1 -------------------------
+
+Sigma: ['', 'ucs+', 'cs+', 'ucs-', 'cs-']
+Delta: ['', 'salivate']
+Last Input: [['ucs-', 1.0]]
+
+------- All States ------
+[ C] State 0
+   <ucs+>: State 0 -> State 1
+      Confidence: 1000000.0
+      PDelta:
+         {'': 0.0, 'salivate': 1.0}
+   <cs+>: State 0 -> State 3
+      Confidence: 0.10000019999996
+      PDelta:
+         {'': 0.9999980000044001, 'salivate': 1.9999956000096804e-06}
+[+ ] State 1
+   <ucs->: State 1 -> State 2
+      Confidence: 1000000.0
+      PDelta:
+         {'': 1.0, 'salivate': 0.0}
+[+ ] State 2
+   <'EPSILON'>: State 2 -> State 0
+      Confidence: 10000.0
+      PDelta:
+         {'': 1.0, 'salivate': 0.0}
+[+ ] State 3
+   <ucs+>: State 3 -> State 4
+      Confidence: 1000000.2
+      PDelta:
+         {'': 0.0, 'salivate': 1.0}
+[+ ] State 4
+   <cs->: State 4 -> State 5
+      Confidence: 0.1
+      PDelta:
+         {'': 1.0, 'salivate': 0.0}
+[+ ] State 5
+   <ucs->: State 5 -> State 6
+      Confidence: 1000000.0
+      PDelta:
+         {'': 1.0, 'salivate': 0.0}
+[ql] State 6
+   <'EPSILON'>: State 6 -> State 0
+      Confidence: 0.1
+      PDelta:
+         {'': 1.0, 'salivate': 0.0}
