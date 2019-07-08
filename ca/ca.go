@@ -7,27 +7,24 @@ import (
 	"math"
 	"math/rand"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
-
-const nΣ = 10
-const nΔ = 10
 
 type transition struct {
 	source *state
 	dest *state
 	sym int
 	C float32
-	P[nΔ] float32
-	mark[nΔ] bool
+	P[] float32
 	cond bool
 	temp bool
 }
 
 type state struct {
 	stnum int
-	δ[nΣ] *transition
+	δ[] *transition
 	rew, pun bool
 	next *state
 }
@@ -38,7 +35,11 @@ type exp struct {
 	next *exp
 }
 
-type inset[nΔ] float32
+type marker struct {
+	t *transition
+	sym int
+	next *marker
+}
 
 var α float32
 var β float32
@@ -48,15 +49,18 @@ var ζ float32
 var ν float32
 var κ float32
 
+var nΣ int
+var nΔ int
 var c *state
 var q_a *state
-var t_m1, t_m2 *transition
+var t_m1 *transition
 var o_l int
 var o int
 var so float32
-var I_m1, I_m2 *inset
+var I_l []float32
 var Q *state
 var E *exp
+var marked *marker
 var nstate int
 var debug bool
 
@@ -71,31 +75,18 @@ func main() {
 		flag.Usage()
 	}
 	procconfig(flag.Arg(0))
-	q0 := mkstate()
-	q1 := mkstate()
-	q2 := mkstate()
-	t := mktrans(q0, q1, 1, 1000000.0, false)
-	t.P[1] = 1.0
-	q0.δ[1] = t
-	t = mktrans(q1, q2, 2, 1000000.0, false)
-	t.P[0] = 1.0
-	q1.δ[2] = t
-	t = mktrans(q2, q0, 0, 1000000.0, false)
-	t.P[0] = 1.0
-	q2.δ[0] = t
 	if debug {
 		dump()
 	}
 	now := time.Now()
 	rand.Seed(now.UnixNano())
-	c = q0
+	c = Q
 	q_a = c
 	t_m1 = nil
-	t_m2 = nil
 	o = 0
 	o_l = 0
-	I_m1 = new(inset)
-	I_m2 = new(inset)
+	I_l = make([]float32, nΣ, nΣ)
+	marked = nil
 	br := bufio.NewReader(os.Stdin)
 	for {
 		inline, err := br.ReadString('\n')
@@ -110,15 +101,23 @@ func main() {
 			fmt.Println(o, so)
 		}
 	}
+	fmt.Fprintln(os.Stderr, nstate, "states")
 }
 
 func procconfig(cf string) {
+	var nq int
+	var qs, qd *state
+	var f []string
+
 	fd, err := os.Open(cf)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
 	bc := bufio.NewReader(fd)
+	/*
+	 * Learning parameters
+	 */
 	s, _ := bc.ReadString('\n')
 	fmt.Sscan(s, &α)
 	s, _ = bc.ReadString('\n')
@@ -133,6 +132,24 @@ func procconfig(cf string) {
 	fmt.Sscan(s, &ν)
 	s, _ = bc.ReadString('\n')
 	fmt.Sscan(s, &κ)
+	/*
+	 * Number of initial states
+	 */
+	s, _ = bc.ReadString('\n')
+	fmt.Sscan(s, &nq)
+	/*
+	 * Size of input alphabet
+	 */
+	s, _ = bc.ReadString('\n')
+	fmt.Sscan(s, &nΣ)
+	/*
+	 * Size of outut alphabet
+	 */
+	s, _ = bc.ReadString('\n')
+	fmt.Sscan(s, &nΔ)
+	for i := 0; i < nq; i++ {
+		mkstate()
+	}
 	if debug {
 		fmt.Println("alpha =", α)
 		fmt.Println("beta =", β)
@@ -141,14 +158,71 @@ func procconfig(cf string) {
 		fmt.Println("zeta =", ζ)
 		fmt.Println("nu =", ν)
 		fmt.Println("kappa =", κ)
+		fmt.Println("nQ =", nq)
+		fmt.Println("nsigma =", nΣ)
+		fmt.Println("ndelta =", nΔ)
+	}
+	/*
+	 * Set of reward states
+	 */
+	s, _ = bc.ReadString('\n')
+	st := strings.TrimSuffix(s, "\n")
+	if len(st) > 0 {
+		f = strings.Split(st, " ")
+		for _, q := range f {
+			qn, _ := strconv.Atoi(q)
+			for qs = Q; qs != nil && qs.stnum != qn; qs = qs.next { }
+			qs.rew = true
+		}
+	}
+	/*
+	 * Set of punishment states
+	 */
+	s, _ = bc.ReadString('\n')
+	st = strings.TrimSuffix(s, "\n")
+	if len(st) > 0 {
+		f = strings.Split(strings.TrimSuffix(s, "\n"), " ")
+		for _, q := range f {
+			qn, _ := strconv.Atoi(q)
+			for qs = Q; qs != nil && qs.stnum != qn; qs = qs.next { }
+			qs.pun = true
+		}
+	}
+	/*
+	 * Set of transitions
+	 */
+	for {
+		s, err = bc.ReadString('\n')
+		if err != nil {
+			break
+		}
+		t := new(transition)
+		f = strings.Split(strings.TrimSuffix(s, "\n"), " ")
+		src, _ := strconv.Atoi(f[0])
+		dst, _ := strconv.Atoi(f[1])
+		sym, _ := strconv.Atoi(f[2])
+		c, _ := strconv.ParseFloat(f[3], 32)
+		for qs = Q; qs != nil && qs.stnum != src; qs = qs.next { }
+		for qd = Q; qd != nil && qd.stnum != dst; qd = qd.next { }
+		t.source = qs
+		t.dest = qd
+		t.sym = sym
+		t.C = float32(c)
+		t.P = make([]float32, nΔ, nΔ)
+		qs.δ[sym] = t
+		for i := 4; i < len(f); i += 2 {
+			sym, _ = strconv.Atoi(f[i])
+			prob, _ := strconv.ParseFloat(f[i+1], 32)
+			t.P[sym] = float32(prob)
+		}
 	}
 }
 
-func parseinput(s string) *inset {
+func parseinput(s string) []float32 {
 	var sym int
 	var str float32
 
-	i := new(inset)
+	i := make([]float32, nΣ, nΣ)
 	inlist := strings.Split(s, " ")
 	for _, inp := range inlist {
 		fmt.Sscanf(inp, "%d/%f", &sym, &str)
@@ -191,7 +265,7 @@ func dumpmach(q *state) {
 	}
 }
 
-func step(I *inset) {
+func step(I []float32) {
 	if I[0] > 0.0001 {
 		t := c.δ[0]
 		if t != nil {
@@ -202,19 +276,9 @@ func step(I *inset) {
 		o_l = o
 		o = 0
 		app_cond(0, 1.0)
-		for q := Q; q != nil; q = q.next {
-			for a := 0; a < nΣ; a++ {
-				for b := 0; b < nΔ; b++ {
-					if q.δ[a] != nil {
-						q.δ[a].mark[b] = false
-					}
-				}
-			}
-		}
-		t_m2 = nil
+		marked = nil
 		t_m1 = nil
-		I_m1 = new(inset)
-		I_m2 = new(inset)
+		I_l = make([]float32, nΣ, nΣ)
 		return
 	}
 	a_d := 0
@@ -230,26 +294,20 @@ func step(I *inset) {
 	o_l = o
 	o = λ(t)
 	so = s_d * t.C / (1.0 + t.C)
-	t.mark[o] = true
 	updateE(I, a_d)
-/*
-	if c.rew {
-		reward()
-	} else if c.pun {
-		punish()
-	}
-*/
-	if o_l != 0 && o != o_l {
+	if t.dest.rew {
+		reward(s_d)
+	} else if t.dest.pun {
+		punish(s_d)
+	} else if o_l != 0 && o != o_l {
 		app_cond(a_d, s_d)
 	}
 	c = t.dest
-	I_m2 = I_m1
-	I_m1 = I
-	t_m2 = t_m1
+	I_l = I
 	t_m1 = t
 }
 
-func createt(I *inset) {
+func createt(I []float32) {
 	if c.δ[0] != nil && c.δ[0].temp {
 		c.δ[0] = nil
 	}
@@ -264,8 +322,8 @@ func createt(I *inset) {
 				if qp != nil {
 					copy(c.δ[i].P[:], qp.δ[i].P[:])
 					c.δ[i].C = qp.δ[i].C
-					qn.rew = qp.rew
-					qn.pun = qp.pun
+					qn.rew = qp.δ[i].dest.rew
+					qn.pun = qp.δ[i].dest.pun
 					e := new(exp)
 					e.t1 = c.δ[i]
 					e.t2 = qp.δ[i]
@@ -278,7 +336,7 @@ func createt(I *inset) {
 					E = e
 				} else {
 					c.δ[i].P[0] = η
-					x := (1.0 - η) / (nΔ - 1)
+					x := (1.0 - η) / float32(nΔ - 1)
 					for b := 1; b < nΔ; b++ {
 						c.δ[i].P[b] = x
 					}
@@ -288,7 +346,7 @@ func createt(I *inset) {
 	}
 }
 
-func updateE(I *inset, a_d int) {
+func updateE(I []float32, a_d int) {
 	var e *exp
 
 	if t_m1 != nil {
@@ -384,21 +442,67 @@ func updateE(I *inset, a_d int) {
 	}
 }
 
-/*
-func reward() {
-	t := 1.0
-	for q := Q; q != nil; q = q.next {
-		for a := 0; a < nΣ; a++ {
-			if q.δ[a] != nil {
-				for o := 0; o < nΔ; n++ {
-					if q.δ[a].mark[o] {
-					}
-				}
+func reward(s_d float32) {
+	t := float32(1.0)
+	for m := marked; m != nil; m = m.next {
+		x := (ζ * t * s_d) / m.t.C
+		for b := 0; b < nΔ; b++ {
+			if b == m.sym {
+				m.t.P[b] = (m.t.P[b] + x) / (1.0 + x)
+			} else {
+				m.t.P[b] /= 1.0 + x
 			}
 		}
+		m.t.C += ζ * t * s_d
+		for qp := Q; qp != nil; qp = qp.next {
+			if qp != m.t.source && qp.δ[m.t.sym] != nil {
+				x = (ν * ζ * t * s_d) / qp.δ[m.t.sym].C
+				for b := 0; b < nΔ; b++ {
+					if b == m.sym {
+						qp.δ[m.t.sym].P[b] = (qp.δ[m.t.sym].P[b] + x) / (1.0 + x)
+					} else {
+						qp.δ[m.t.sym].P[b] /= 1.0 + x
+					}
+				}
+				qp.δ[m.t.sym].C += ν * ζ * t * s_d
+			}
+		}
+		t *= κ
 	}
+	marked = nil
 }
-*/
+
+func punish(s_d float32) {
+	t := float32(1.0)
+	for m := marked; m != nil; m = m.next {
+		x := (ζ * t * s_d) / m.t.C
+		y := x / float32(nΔ -1)
+		for b := 0; b < nΔ; b++ {
+			if b == m.sym {
+				m.t.P[b] /= 1.0 + x
+			} else {
+				m.t.P[b] = (m.t.P[b] + y) / (1.0 + x)
+			}
+		}
+		m.t.C += ζ * t * s_d
+		for qp := Q; qp != nil; qp = qp.next {
+			if qp != m.t.source && qp.δ[m.t.sym] != nil {
+				x = (ν * ζ * t * s_d) / qp.δ[m.t.sym].C
+				y = x / float32(nΔ - 1)
+				for b := 0; b < nΔ; b++ {
+					if b == m.sym {
+						qp.δ[m.t.sym].P[b] /= 1.0 + x
+					} else {
+						qp.δ[m.t.sym].P[b] = (qp.δ[m.t.sym].P[b] + y) / (1.0 + x)
+					}
+				}
+				qp.δ[m.t.sym].C += ν * ζ * t * s_d
+			}
+		}
+		t *= κ
+	}
+	marked = nil
+}
 
 func app_cond(a_d int, s_d float32) {
 	if t_m1 == nil {
@@ -408,7 +512,7 @@ func app_cond(a_d int, s_d float32) {
 	a_l := t_m1.sym
 	if debug {
 		fmt.Fprint(os.Stderr, "Conditioning: c=", c.stnum, " a_d=", a_d,
-			" q_l=", q_l.stnum, " a_l=", a_l, " o_l=", o_l, " I-2=", I_m2, "\n")
+			" q_l=", q_l.stnum, " a_l=", a_l, " o_l=", o_l, " I_l=", I_l, "\n")
 	}
 	for q := Q; q != nil; q = q.next {
 		for a := 1; a < nΣ; a++ {
@@ -418,7 +522,7 @@ func app_cond(a_d int, s_d float32) {
 		}
 	}
 	for a := 1; a < nΣ; a++ {
-		if I_m1[a] > 0.0001 && q_l.δ[a] != nil {
+		if I_l[a] > 0.0001 && q_l.δ[a] != nil {
 			e := findE(q_l, a_l, q_l, a)
 			if e != nil {
 				for b := 0; b < nΔ; b++ {
@@ -448,7 +552,7 @@ func app_cond(a_d int, s_d float32) {
 		}
 	}
 	for a := 1; a < nΣ; a++ {
-		if I_m1[a] > 0.0001 && q_l.δ[a] != nil && !(q_l.δ[a].cond) {
+		if I_l[a] > 0.0001 && q_l.δ[a] != nil && !(q_l.δ[a].cond) {
 			e := findE(q_l, a_l, q_l, a)
 			if e != nil {
 				if !(q_l.δ[a].cond) {
@@ -513,7 +617,7 @@ func updcond(qp *state, ap int, s float32) {
 		}
 	}
 	for a := 1; a < nΣ; a++ {
-		if /* I_m1[a] > 0.0001 && */ qp.δ[a] != nil && !(qp.δ[a].cond) {
+		if /* I_l[a] > 0.0001 && */ qp.δ[a] != nil && !(qp.δ[a].cond) {
 			e := findE(qp, ap, qp, a)
 			if e != nil {
 				qp.δ[a].C += γ * s
@@ -569,6 +673,7 @@ func mktrans(src *state, dest *state, sym int, C float32, temp bool) *transition
 	t.source = src
 	t.dest = dest
 	t.sym = sym
+	t.P = make([]float32, nΔ, nΔ)
 	t.C = C
 	t.temp = temp
 	return t
@@ -576,6 +681,7 @@ func mktrans(src *state, dest *state, sym int, C float32, temp bool) *transition
 
 func mkstate() *state {
 	s := new(state)
+	s.δ = make([]*transition, nΣ, nΣ)
 	s.stnum = nstate
 	nstate++
 	s.next = Q
@@ -587,6 +693,11 @@ func λ(t *transition) int {
 	x := rand.Float32()
 	for i := 0; i < nΔ; i++ {
 		if x < t.P[i] {
+			m := new(marker)
+			m.t = t
+			m.sym = i
+			m.next = marked
+			marked = m
 			return i
 		}
 		x -= t.P[i]
