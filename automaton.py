@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+""" An automaton object consists of states and transition 
+This module comprises STATE object and Transition object
+"""
+
 import random
 import sys
 import os
@@ -13,7 +17,14 @@ SIGMA = {0: '',
          3: 'ucs+',
          4: 'ucs-'}
 
-
+""" Object State
+*** Attributes:
+    ID:
+    Next:
+        
+*** Methods: 
+    
+"""
 class State:
     def __init__(self, state_id, next=None):
         self.__id = state_id
@@ -53,7 +64,13 @@ class State:
     def is_punishment(self):
         return self.__punishment is True
 
-
+""" Object Transition 
+*** Attributes:
+    
+    
+*** Methods: 
+    
+"""
 class Transition:
     def __int__(self, Input, previous=None, next_state=None, epsilon=None, temporary=False):
         self.__input = Input
@@ -95,11 +112,15 @@ class Transition:
 
 
 def get_symbol_index(s):
+    """ 
+    """
     global SIGMA
     for num, symbol in enumerate(SIGMA):
         if s == symbol:
             return num
     return None
+
+
 
 
 if __name__ == '__main__':

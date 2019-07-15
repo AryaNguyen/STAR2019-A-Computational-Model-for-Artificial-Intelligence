@@ -1,7 +1,14 @@
+""" This module build an Cybernetic Automaton from State and Transiiton object (from Automaton module)
+
+The Cybernetic Automaton use for ... 
+"""
+
 from automaton import *
 import pandas as pd
 
 
+""" A Cybernetic Automaton consists of ... steps
+"""
 class CyberneticAutomaton:
     def __init__(self, model_parameter, sigma, delta):
         self.__model_parameter = model_parameter
