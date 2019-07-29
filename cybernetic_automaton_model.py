@@ -9,6 +9,8 @@ import pandas as pd
 
 """ A Cybernetic Automaton consists of ... steps
 """
+
+
 class CyberneticAutomaton:
     def __init__(self, model_parameter, sigma, delta):
         self.__model_parameter = model_parameter
@@ -29,10 +31,10 @@ class CyberneticAutomaton:
     def __str__(self):
         pass
 
-    """
     def step1(self):
-        self.__c = self.__Q[0]
-        self.__ql = self.__Q[0]
+        q0 = self.__Q[0]
+        self.__c = q0
+        self.__ql = q0
         self.__al = self.__Epsilon
         self.__ol = self.__Epsilon
 
@@ -44,15 +46,45 @@ class CyberneticAutomaton:
                 if True:
                     pass
                 self.__ql = self.__c
-                self.__c = c.transition(self.__Epsilon)
+                self.__c = self.__c.transition(self.__Epsilon)
             self.__qa = self.__c
             self.__al = self.__Epsilon
             self.__ol = self.__Epsilon
 
     def step3(self):
         file_input = 'cs+'
-    """
 
+    def step4(self):
+        pass
+
+    def step5(self):
+        self.create_transition()
+
+    def step6(self):
+        pass
+
+    def step7(self):
+        pass
+
+    def step8(self):
+        pass
+
+    def step9(self):
+        pass
+
+    def step10(self):
+        self.update_expectation()
+
+    def step11(self):
+        if self.__c in self.__R:
+            self.apply_reward()
+        elif self.__c in self.__P:
+            self.apply_punishment()
+        else:
+            self.apply_conditioning()
+
+    def step12(self):
+        self.step2()
 
     def create_transition(self):
         pass
@@ -71,3 +103,7 @@ class CyberneticAutomaton:
 
     def update_conditioning(self):
         pass
+
+
+if __name__ == '__main__':
+    model = CyberneticAutomaton(1, 1, 1)

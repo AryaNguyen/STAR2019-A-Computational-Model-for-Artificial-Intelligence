@@ -7,9 +7,8 @@ import random
 import sys
 import os
 import math
-import pandas
-import numpy
-from matplotlib import *
+import pandas as pd
+import numpy as np
 
 SIGMA = {0: '',
          1: 'cs+',
@@ -25,28 +24,26 @@ SIGMA = {0: '',
 *** Methods: 
     
 """
+
+
 class State:
     def __init__(self, state_id, next=None):
         self.__id = state_id
         self.__next = next
+        self.__stimulus = None
+        self.__transition = None
         self.__reward = False
         self.__punishment = False
-        self.__transition = None
 
     def __str__(self):
-        return str(self.__id)
+        return 'State {}'.format(str(self.__id))
 
     """ create new transition which will determine the next state
     """
-    def add_transition(self, Input):
-        if not self.is_initial() and not self.is_initial():
-            self.__transition = Transition(Input, previous=0, next_state=0)
-        # last state in the list of states
-        elif not self.is_initial() and self.is_initial():
-            self.__transition = Transition(Input, previous=0, next_state=0)
+    def add_transition(self, stimulus, transition):
         # first state in the list of states
-        else:
-            self.__transition = Transition(Input)
+        self.__stimulus = stimulus
+        self.__transition = transition
 
     def get_next_state(self):
         return self.__next
@@ -55,8 +52,7 @@ class State:
         return self.__id == 0
 
     def is_last(self):
-        last_state = Q[-1]
-        return self.__id == Q.index(last_state)
+        return self.__id == Q.index(Q[-1])
 
     def is_reward(self):
         return self.__reward is True
@@ -64,45 +60,46 @@ class State:
     def is_punishment(self):
         return self.__punishment is True
 
+
 """ Object Transition 
-*** Attributes:
+____ Attributes:
     
     
-*** Methods: 
+____Methods: 
     
 """
-class Transition:
-    def __int__(self, Input, previous=None, next_state=None, epsilon=None, temporary=False):
-        self.__input = Input
-        self.__previous = previous
-        self.__C = None
-        self.__E = None
-        self.__temporary = temporary
-        self.__epsilon = epsilon
 
+
+class Transition:
+    def __init__(self, current_state, next_state, epsilon=None, temporary=False):
+        self.__current = current_state
+        self.__next = next_state
+        self.__temporary = temporary
+
+        self.__epsilon = epsilon
         self.__C = None  # Confidence
         self.__E = None  # Expectation
 
     def __str__(self):
-        return '{} --> {}'.format(self.__previous, self.__next)
+        return 'Transition from {} --> {}'.format(self.__current, self.__next)
 
-    def get_previous(self):
-        return self.__previous
+    def get_current(self):
+        return self.__current
 
     def get_next(self):
         return self.__next
 
     def get_confidence(self):
-        pass
+        return self.__C
 
     def get_expectation(self):
-        pass
+        return self.__E
 
-    def set_confidence(self):
-        pass
+    def set_confidence(self, c):
+        self.__C = c
 
-    def set_expectation(self):
-        pass
+    def set_expectation(self, e):
+        self.__E = e
 
     def is_temporary(self):
         return self.__temporary is True
@@ -111,26 +108,36 @@ class Transition:
         pass
 
 
-def get_symbol_index(s):
-    """ 
-    """
-    global SIGMA
-    for num, symbol in enumerate(SIGMA):
-        if s == symbol:
-            return num
-    return None
+class Stimulus:
+    def __init__(self, symbol):
+        self.__symbol = symbol
 
+    def __str__(self):
+        return 'Stimulus: {}'.format(self.__symbol)
 
+    def __getitem__(self, item):
+        """
+        """
+        global SIGMA
+        for num, symbol in enumerate(SIGMA):
+            if item == symbol:
+                return num
+        return None
 
 
 if __name__ == '__main__':
+    print('Example of State and Transition object:')
     Q = []
     q = None
-    list_states = numpy.array([0, 1, 2])
+    list_states = np.array([0, 1, 2])
     for i in list_states:
-        print(i)
         q = State(i)
         Q.append(q)
+    print(Q[0])
+    t = Transition(Q[0], Q[1])
+    print(t)
+
+
 
 
 
