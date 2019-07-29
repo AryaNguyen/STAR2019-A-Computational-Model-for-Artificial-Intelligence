@@ -1,0 +1,4 @@
+#!/bin/sh
+
+9 graph -g 1 -y 0 10 $* | 9 plot
+ 
