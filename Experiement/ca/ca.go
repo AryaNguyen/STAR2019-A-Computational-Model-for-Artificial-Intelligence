@@ -80,7 +80,11 @@ func main() {
 	}
 	now := time.Now()
 	rand.Seed(now.UnixNano())
-	c = Q
+	for c = Q; c != nil; c = c.next {
+		if c.stnum == 0 {
+			break
+		}
+	}
 	q_a = c
 	t_m1 = nil
 	o = 0

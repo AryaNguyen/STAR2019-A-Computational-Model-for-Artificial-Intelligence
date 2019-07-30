@@ -3,7 +3,8 @@ from subprocess import *
 import numpy as np
 import matplotlib.pyplot as plt
 
-pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/ca/ca.macos", "cfg/d1ext.cfg"], stdin=PIPE, stdout=PIPE)
+pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
+            stdin=PIPE, stdout=PIPE)
 
 n = 0
 while n < 20:
@@ -43,15 +44,14 @@ for i in xrange(10):
 #pid.stdin.write("D\n")
 pid.stdin.close() 
 
-# Visualizing the dataset
-plt.scatter(dataset[:, 0], dataset[:, 1], color='red')
-plt.plot(dataset[:, 0], dataset[:, 1])
-plt.title('Delayed Condionting ')
+# Visualizing the output
+plt.plot(dataset[:, 0], dataset[:, 1], linestyle='-', marker='o')
 plt.xlabel('Trial batch')
 plt.ylabel('Responses')
-plt.ylim(ymax=10)
-plt.xlim(xmax=10)
+plt.ylim(ymax=11)
+plt.xlim(xmax=11)
 plt.show()
+
 
 
 

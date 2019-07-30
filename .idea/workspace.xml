@@ -2,14 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="780febb4-5005-4e81-813d-9d6baf6a91d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Arya Nguyen.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cybernetic_automaton_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/organism.py" beforeDir="false" afterPath="$PROJECT_DIR$/automaton.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/ca.go" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/ca.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/ca.macos" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/ca.macos" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/block.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/cmpd.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/d1.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/d1ext.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/d2.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/d2ext.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/latent.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/partial.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/s1.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/s2.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/s2ext.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/cfg/skinner.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/d1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/d1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/d1ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/d1ext.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/d2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/d2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/d2ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/d2ext.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/latent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/latent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/partial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/partial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/precond.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/precond.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/s1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/s1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/s2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/s2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/s2ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/s2ext.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/skinner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/skinner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Experiement/ca/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Experiement/ca/test1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,57 +53,42 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Prof. Stuart/ca/ca.go">
+        <entry file="file://$PROJECT_DIR$/Experiement/ca/partial.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="720">
+              <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cybernetic_automaton_model.py">
+        <entry file="file://$PROJECT_DIR$/Experiement/ca/s1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            <state relative-caret-position="510">
+              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Experiement/ca/s2ext.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#18#49#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/automaton.py">
+        <entry file="file://$PROJECT_DIR$/Experiement/ca/skinner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="93" column="12" lean-forward="true" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
+            <state relative-caret-position="935">
+              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
               <folding>
-                <element signature="e#23#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Daniel Code/engine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="528" column="11" selection-start-line="528" selection-start-column="4" selection-end-line="528" selection-end-column="11" />
-              <folding>
-                <element signature="e#9#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Daniel Code/experiment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
+                <element signature="e#18#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,6 +148,11 @@
         <option value="$PROJECT_DIR$/../Daniel Code/engine.py" />
         <option value="$PROJECT_DIR$/cybernetic_automaton_model.py" />
         <option value="$PROJECT_DIR$/automaton.py" />
+        <option value="$PROJECT_DIR$/Experiement/ca/s2.py" />
+        <option value="$PROJECT_DIR$/Experiement/ca/partial.py" />
+        <option value="$PROJECT_DIR$/Experiement/ca/s1.py" />
+        <option value="$PROJECT_DIR$/Experiement/ca/s2ext.py" />
+        <option value="$PROJECT_DIR$/Experiement/ca/skinner.py" />
       </list>
     </option>
   </component>
@@ -156,6 +165,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,11 +173,21 @@
               <item name="Arya Nguyen" type="b2602c69:ProjectViewProjectNode" />
               <item name="Arya Nguyen" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Arya Nguyen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Arya Nguyen" type="462c0819:PsiDirectoryNode" />
+              <item name="Experiement" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Arya Nguyen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Arya Nguyen" type="462c0819:PsiDirectoryNode" />
+              <item name="Experiement" type="462c0819:PsiDirectoryNode" />
+              <item name="ca" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -197,6 +217,9 @@
       <module name="Arya Nguyen" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -323,17 +346,20 @@
       <workItem from="1562700430126" duration="1426000" />
       <workItem from="1562702929953" duration="14559000" />
       <workItem from="1562876129674" duration="6448000" />
+      <workItem from="1564454768089" duration="59000" />
+      <workItem from="1564503375548" duration="50000" />
+      <workItem from="1564517847509" duration="504000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22433000" />
+    <option name="totallyTimeSpent" value="23046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49938348" weight="0.18731989" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49938348" visible="true" weight="0.19264069" />
       <window_info id="Structure" order="1" sideWeight="0.50061655" side_tool="true" weight="0.18731989" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -348,13 +374,13 @@
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" sideWeight="0.50308263" side_tool="true" weight="0.3299712" />
-      <window_info anchor="right" auto_hide="true" id="SciView" order="0" show_stripe_button="false" sideWeight="0.49321824" type="FLOATING" weight="0.3299712" />
+      <window_info anchor="right" id="SciView" order="0" sideWeight="0.49321824" weight="0.3299712" />
       <window_info anchor="right" id="Database" order="1" sideWeight="0.4969174" weight="0.3299712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
       <window_info anchor="right" id="Run" order="5" sideWeight="0.50308263" side_tool="true" weight="0.32708934" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" order="6" sideWeight="0.50308263" side_tool="true" weight="0.3299712" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,9 +426,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/automaton.py" />
+    <entry file="file://$PROJECT_DIR$/../Prof. Stuart/ca/ca.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../Daniel Code/experiment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
+        <state relative-caret-position="1054">
           <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
@@ -410,10 +444,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Prof. Stuart/ca/ca.go">
+    <entry file="file://$PROJECT_DIR$/cybernetic_automaton_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -427,22 +461,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cybernetic_automaton_model.py">
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/precond.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        <state relative-caret-position="567">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/s2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/partial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/s1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/s2ext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#18#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/automaton.py">
+    <entry file="file://$PROJECT_DIR$/Experiement/ca/skinner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="93" column="12" lean-forward="true" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
+        <state relative-caret-position="935">
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
           <folding>
-            <element signature="e#23#36#0" expanded="true" />
+            <element signature="e#18#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
