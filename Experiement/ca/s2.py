@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import matplotlib.pyplot as plt
+from graph import Graph
 import numpy as np
 from subprocess import *
 
@@ -54,9 +54,7 @@ for i in xrange(10):
 pid.stdin.close()
 
 # Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1], linestyle='-', marker='o')
-plt.xlabel('Trial batch')
-plt.ylabel('Responses produced')
-plt.ylim(ymax=11)
-plt.xlim(xmax=11)
-plt.show()
+graph = Graph([(dataset[:, 0], dataset[:, 1])], 
+              title='Results of Simultaneous Second-Order Conditioning',
+              file_name='plot/s2.png')
+graph.plot_save()

@@ -3,7 +3,7 @@ from subprocess import *
 import random
 import sys
 import numpy as np
-import matplotlib.pyplot as plt
+from graph import Graph
 #
 # 1:1N, 2:1E, 3:1S, 4:1W, 5:2N, 6:2E, 7:2S, 8:2W, 9:F
 #
@@ -56,12 +56,9 @@ for i in xrange(300):
     pid.stdout.readline()
     dataset = np.append(dataset, [[i, j]], axis=0)
     print i, j
-    
-# Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1])
-plt.xlabel('Trial batch')
-plt.ylabel('Responses produced')
-#plt.ylim(ymax=11)
-#plt.xlim(xmax=11)
-plt.show()
 
+# Visualizing the output
+graph = Graph([(dataset[:, 0], dataset[:, 1])], 
+              title='Results of Skinner Box Response',
+              file_name='plot/skinner_box.png')
+graph.plot_save()

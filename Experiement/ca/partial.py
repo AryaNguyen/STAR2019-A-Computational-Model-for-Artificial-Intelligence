@@ -1,16 +1,16 @@
 #!/usr/bin/python
-import matplotlib.pyplot as plt
 import numpy as np
 import random
 from subprocess import *
+from graph import Graph
 
 pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
             stdin=PIPE, stdout=PIPE)
 
 print "100%"
 
-dataset = np.array([[0, 0]])
 print 0, 0
+dataset1 = np.array([[0, 0]])
 for i in xrange(4):
     n = 0
     for j in xrange(10):
@@ -26,10 +26,11 @@ for i in xrange(4):
         pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
+    dataset1 = np.append(dataset1, [[i+1, n]], axis=0)
     print i+1, n
 
 print
-dataset = np.array([[0, n]])
+dataset2 = np.array([[0, n]])
 print 0, n
 for i in xrange(10):
     n = 0
@@ -42,7 +43,7 @@ for i in xrange(10):
         pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset2 = np.append(dataset2, [[i+1, n]], axis=0)
     print i+1, n
 
 pid.stdin.close()
@@ -52,8 +53,8 @@ pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement
 
 print "75%"
 
-dataset = np.array([[0, 0]])
 print 0, 0
+dataset3 = np.array([[0, 0]])
 for i in xrange(4):
     n = 0
     for j in xrange(10):
@@ -72,11 +73,11 @@ for i in xrange(4):
             pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset3 = np.append(dataset3, [[i+1, n]], axis=0)
     print i+1, n
 
 print
-dataset = np.array([[0, 0]])
+dataset4 = np.array([[0, 0]])
 print 0, n
 for i in xrange(10):
     n = 0
@@ -89,7 +90,7 @@ for i in xrange(10):
         pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset4 = np.append(dataset4, [[i+1, n]], axis=0)
     print i+1, n
 
 pid.stdin.close()
@@ -99,7 +100,7 @@ pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement
 
 print "50%"
 
-dataset = np.array([[0, 0]])
+dataset5 = np.array([[0, 0]])
 print 0, 0
 for i in xrange(4):
     n = 0
@@ -119,11 +120,11 @@ for i in xrange(4):
             pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset5 = np.append(dataset5, [[i+1, n]], axis=0)
     print i+1, n
 
 print
-dataset = np.array([[0, 0]])
+dataset6 = np.array([[0, n]])
 print 0, n
 for i in xrange(10):
     n = 0
@@ -136,7 +137,7 @@ for i in xrange(10):
         pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset6 = np.append(dataset6, [[i+1, n]], axis=0)
     print i+1, n
 
 pid.stdin.close()
@@ -146,7 +147,7 @@ pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement
 
 print "25%"
 
-dataset = np.array([[0, 0]])
+dataset7 = np.array([[0, 0]])
 print 0, 0
 for i in xrange(4):
     n = 0
@@ -166,11 +167,11 @@ for i in xrange(4):
             pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset7 = np.append(dataset7, [[i+1, n]], axis=0)
     print i+1, n
 
 print
-dataset = np.array([[0, 0]])
+dataset8 = np.array([[0, n]])
 print 0, n
 for i in xrange(10):
     n = 0
@@ -183,19 +184,59 @@ for i in xrange(10):
         pid.stdout.readline()
         pid.stdin.write("0/1\n")
         pid.stdout.readline()
-    dataset = np.append(dataset, [[i+1, n]], axis=0)
+    dataset8 = np.append(dataset8, [[i+1, n]], axis=0)
     print i+1, n
 
 pid.stdin.close()
 
 """
-# Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1], marker='o', markerfacecolor='red', markersize=10, linewidth=3)
-plt.plot(dataset[:, 0], dataset[:, 1], linestyle='dashed')
-plt.title('Latent Inhibition')
+# Visualizing Conditioning with Partial reinforcement
+plt.plot(dataset1[:, 0], dataset1[:, 1], linestyle='dashed', label='100%')
+plt.plot(dataset3[:, 0], dataset3[:, 1], linestyle='dotted', label='75%')
+plt.plot(dataset5[:, 0], dataset5[:, 1], linestyle='dashdot', label='50%')
+plt.plot(dataset7[:, 0], dataset7[:, 1], linestyle='solid', label='25%')
 plt.xlabel('Trial batch')
 plt.ylabel('Responses')
-plt.ylim(ymax=10)
-plt.xlim(xmax=10)
+plt.ylim(ymax=11)
+plt.xlim(xmax=11)
+plt.grid(True)
+plt.legend()
+plt.savefig('plot/partial.png')
+plt.show()
+
+# Visualizing the output
+plt.plot(dataset2[:, 0], dataset2[:, 1], linestyle='dashed', label='100%')
+plt.plot(dataset4[:, 0], dataset4[:, 1], linestyle='dotted', label='75%')
+plt.plot(dataset6[:, 0], dataset6[:, 1], linestyle='dashdot', label='50%')
+plt.plot(dataset8[:, 0], dataset8[:, 1], linestyle='solid', label='25%')
+plt.xlabel('Trial batch')
+plt.ylabel('Responses')
+plt.ylim(ymax=11)
+plt.xlim(xmax=11)
+plt.grid(True)
+plt.legend()
+plt.savefig('plot/partial_exctinct.png')
 plt.show()
 """
+
+# Visualizing Conditioning with Partial reinforcement
+graph1 = Graph([(dataset1[:, 0], dataset1[:, 1]),
+               (dataset3[:, 0], dataset3[:, 1]),
+               (dataset5[:, 0], dataset5[:, 1]),
+               (dataset7[:, 0], dataset7[:, 1])], 
+              title='Results of Partial Reinforcement',
+              file_name='plot/partial.png',
+              label=['100%', '75%', '50%', '25%'],
+              linestyle=['dashed', 'dotted', 'dashdot', 'solid'])
+graph1.plot_save()
+
+# Visualizing the output
+graph2 = Graph([(dataset2[:, 0], dataset2[:, 1]),
+               (dataset4[:, 0], dataset4[:, 1]),
+               (dataset6[:, 0], dataset6[:, 1]),
+               (dataset8[:, 0], dataset8[:, 1])], 
+              title='Results of Extinction after Partial Reinforcement',
+              file_name='plot/partial_extinction.png',
+              label=['100%', '75%', '50%', '25%'],
+              linestyle=['dashed', 'dotted', 'dashdot', 'solid'])
+graph2.plot_save()

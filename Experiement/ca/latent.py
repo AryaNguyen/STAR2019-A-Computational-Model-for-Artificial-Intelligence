@@ -1,7 +1,7 @@
 #!/usr/bin/python
-import matplotlib.pyplot as plt
 import numpy as np
 from subprocess import *
+from graph import Graph
 
 pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
             stdin=PIPE, stdout=PIPE)
@@ -36,11 +36,8 @@ for i in xrange(10):
 pid.stdin.close()
 
 # Visualizing the output
-plt.scatter(dataset[:, 0], dataset[:, 1], color='red')
-plt.plot(dataset[:, 0], dataset[:, 1])
-plt.title('Latent Inhibition')
-plt.xlabel('Trial batch')
-plt.ylabel('Responses')
-plt.ylim(ymax=10)
-plt.xlim(xmax=10)
-plt.show()
+graph = Graph([(dataset[:, 0], dataset[:, 1])], 
+              title='Results of a Latent Inhibition Experiment',
+              file_name='plot/latent.png')
+graph.plot_save()
+

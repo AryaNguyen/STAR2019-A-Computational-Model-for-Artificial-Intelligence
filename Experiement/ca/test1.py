@@ -1,12 +1,23 @@
-# libraries
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import seaborn as sns
- 
-# data
-df=pd.DataFrame({'x': range(1,10), 'y': np.random.randn(9)*80+range(1,10) })
- 
-# plot
-plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
-plt.show()
+import collections
+
+print('Regular dictionary:')
+d = {}
+d['a'] = 'A'
+d['b'] = 'B'
+d['c'] = 'C'
+d['d'] = 'D'
+d['e'] = 'E'
+
+for k, v in d.items():
+    print(k, v)
+
+print('\nOrderedDict:')
+d = collections.OrderedDict()
+d['a'] = 'A'
+d['b'] = 'B'
+d['c'] = 'C'
+d['d'] = 'D'
+d['e'] = 'E'
+
+for k, v in d.items():
+    print(k, v)

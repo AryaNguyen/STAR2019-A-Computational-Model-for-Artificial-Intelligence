@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from subprocess import *
 import numpy as np
-import matplotlib.pyplot as plt
+from graph import Graph
 
 pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
             stdin=PIPE, stdout=PIPE)
@@ -9,6 +9,7 @@ pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement
 #
 # 1:UCS+, 2:UCS-, 3:CS1+, 4:CS1-, 5:CS2+, 6:CS2-
 #
+
 
 n = 0
 while n < 80:
@@ -54,7 +55,8 @@ for i in xrange(100):
     pid.stdout.readline()
 
 # Test CS2 by extinction
-#dataset = np.array([[0, 0]])
+dataset = np.array([[0, 10]])
+print 0, 10
 for i in xrange(10):
     n = 0
     for j in xrange(10):
@@ -73,9 +75,7 @@ for i in xrange(10):
 pid.stdin.close()
 
 # Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1], linestyle='-', marker='o')
-plt.xlabel('Trial batch')
-plt.ylabel('Responses')
-plt.ylim(ymax=11)
-plt.xlim(xmax=11)
-plt.show()
+graph = Graph([(dataset[:, 0], dataset[:, 1])], 
+              title='Results of Extinction after Delayed Conditioning',
+              file_name='plot/d2ext.png')
+graph.plot_save()

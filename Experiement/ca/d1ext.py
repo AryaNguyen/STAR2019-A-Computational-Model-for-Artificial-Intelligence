@@ -2,6 +2,7 @@
 from subprocess import *
 import numpy as np
 import matplotlib.pyplot as plt
+from graph import Graph
 
 pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
             stdin=PIPE, stdout=PIPE)
@@ -45,13 +46,8 @@ for i in xrange(10):
 pid.stdin.close() 
 
 # Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1], linestyle='-', marker='o')
-plt.xlabel('Trial batch')
-plt.ylabel('Responses')
-plt.ylim(ymax=11)
-plt.xlim(xmax=11)
-plt.show()
-
-
-
+graph = Graph([(dataset[:, 0], dataset[:, 1])],
+              title='Results of Extinction after Delayed Conditioning',
+              file_name='plot/d1ext.png')
+graph.plot_save()
 

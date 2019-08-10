@@ -1,7 +1,7 @@
 #!/usr/bin/python
-import matplotlib.pyplot as plt
 import numpy as np
 from subprocess import *
+from graph import Graph
 
 pid = Popen(["/Users/thiquynhnhunguyen/Desktop/STAR 2019/Arya Nguyen/Experiement/ca/ca.macos", "basic.cfg"], 
             stdin=PIPE, stdout=PIPE)
@@ -35,9 +35,7 @@ for i in xrange(10):
 pid.stdin.close()
 
 # Visualizing the output
-plt.plot(dataset[:, 0], dataset[:, 1], linestyle='-', marker='o')
-plt.xlabel('Trial batch')
-plt.ylabel('Responses produced')
-plt.ylim(ymax=11)
-plt.xlim(xmax=11)
-plt.show()
+graph = Graph([(dataset[:, 0], dataset[:, 1])], 
+              title='Results of Simultaneous First-Order Conditioning',
+              file_name='plot/s1.png')
+graph.plot_save()
